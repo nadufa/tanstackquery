@@ -1,0 +1,35 @@
+.contentBody {
+  flex-direction: column;
+  flex: 1;
+  margin-top: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-right: 10px;
+  position: relative;
+
+  .characterItem {
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border: 3px solid rgb(187, 187, 187);
+    border-radius: 15px;
+    gap: 25px;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    &.selected {
+      border: 6px solid #745494;
+      background: linear-gradient( #d5c0e9, #fff, #d5c0e9 );
+      transition: 50ms;
+    }
+
+    .characterItemImg {
+    height: 100px;
+    width: 100px;
+    border-radius: 15px;
+    }
+  }
+  
+}
