@@ -14,6 +14,7 @@
     border: 3px solid rgb(187, 187, 187);
     border-radius: 15px;
     gap: 25px;
+    cursor: pointer;
 
     &:not(:last-child) {
       margin-bottom: 20px;

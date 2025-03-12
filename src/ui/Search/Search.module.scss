@@ -1,0 +1,18 @@
+.searchBlock {
+  height: 100px;  
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+
+  .search {
+    width: 100%;
+
+    input {
+      height: 60px;
+      padding: 20px;
+      border-radius: 15px;
+      font-size: larger;
+      font-weight: 500;
+    }
+  }
+}

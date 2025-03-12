@@ -1,0 +1,29 @@
+.contentBlock {
+  height: 10%;  
+  width: 100%;
+  flex: 1;
+  gap: 30px;
+  
+  .contentPart {
+    flex-direction: column;
+    width: 50%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+
+    .contentHeader {
+      height: 50px;
+      width: 100%;
+      text-align: center;
+      border-bottom: 3px solid #71657e;
+    }
+
+    .errorBlock {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      gap: 30px;
+    }
+  }
+}

@@ -1,9 +1,9 @@
-import { Box, Button, Flex, Input, Title } from "@mantine/core";
-import clsx from "clsx";
+import { Flex } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useGetCharacters } from "../api/useGetCharacters";
+import { Content } from "../ui/Content/Content";
+import { Search } from "../ui/Search/Search";
 import s from "./Container.module.scss";
-import { List } from "./List/List";
 
 export const Container = () => {
   const { data, isFetching, isError, refetch } = useGetCharacters();
@@ -19,36 +19,15 @@ export const Container = () => {
   return (
     <Flex className={s.main}>
       <Flex className={s.container}>
-        <Flex className={s.searchBlock}>
-          <Input className={s.search} placeholder="Search" />
-        </Flex>
-        <Flex className={s.contentBlock}>
-          <Flex className={clsx(s.list, s.contentPart)}>
-            <Box className={s.contentHeader}>
-              <Title order={2}>List of characters</Title>
-            </Box>
-            {isError ? (
-              <Flex className={s.errorBlock}>
-                <Title order={2}>Oops, an error occured!</Title>
-                <Button bg={"#7c609a"} size="lg" onClick={() => refetch()}>
-                  Try again
-                </Button>
-              </Flex>
-            ) : (
-              <List
-                data={data}
-                isFetching={isFetching}
-                selectedCharacter={selectedCharacter}
-                setSelectedCharacter={setSelectedCharacter}
-              />
-            )}
-          </Flex>
-          <Flex className={clsx(s.details, s.contentPart)}>
-            <Box className={s.contentHeader}>
-              <Title order={2}>Character information</Title>
-            </Box>
-          </Flex>
-        </Flex>
+        <Search />
+        <Content
+          data={data}
+          isFetching={isFetching}
+          refetch={refetch}
+          isError={isError}
+          selectedCharacter={selectedCharacter}
+          setSelectedCharacter={setSelectedCharacter}
+        />
       </Flex>
     </Flex>
   );
