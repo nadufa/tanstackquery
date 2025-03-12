@@ -12,5 +12,26 @@
     height: 95%;
     width: 90%;
     max-width: 1800px;
+
+    .contentBlock {
+      height: 10%;  
+      width: 100%;
+      flex: 1;
+      gap: 30px;
+      
+      .contentPart {
+        flex-direction: column;
+        width: 50%;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+    
+        .contentHeader {
+          height: 5%;
+          text-align: center;
+          border-bottom: 3px solid #71657e;
+        }
+      }
+    }
   }
 }

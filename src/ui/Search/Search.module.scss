@@ -1,11 +1,25 @@
-.searchBlock {
+.searchPanel {
   height: 100px;  
   width: 100%;
   align-items: flex-start;
   justify-content: center;
+  gap: 30px;
+
+  .searchBlock {
+    flex: 1;
+    gap: 10px;
+
+    input, div {
+      height: 60px;
+      border-radius: 15px;
+      display: flex ;
+      align-items:center;
+      justify-content: center;
+    }
+  }
 
   .search {
-    width: 100%;
+    width: 70%;
 
     input {
       height: 60px;

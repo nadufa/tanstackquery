@@ -1,0 +1,5 @@
+@use '../../app/mixins.scss';
+
+.contentBody {
+  @include mixins.scroll-styles;
+}

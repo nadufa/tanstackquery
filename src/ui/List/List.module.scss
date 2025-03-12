@@ -1,11 +1,7 @@
+@use '../../app/mixins.scss';
+
 .contentBody {
-  flex-direction: column;
-  flex: 1;
-  margin-top: 20px;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding-right: 10px;
-  position: relative;
+  @include mixins.scroll-styles;
 
   .characterItem {
     align-items: center;
@@ -31,6 +27,5 @@
     width: 100px;
     border-radius: 15px;
     }
-  }
-  
+  } 
 }
