@@ -1,15 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { ISearchState } from "../Container/types";
 import { ICharactersData } from "./types";
 
+interface GetParamsType extends ISearchState {
+  pageParam: number;
+}
+
 const getParams = ({
-  activePage,
   genderValue,
   inputSelect,
   inputText,
   statusValue,
-}: ISearchState) => {
+  pageParam,
+}: GetParamsType) => {
   const params = [
     { condition: inputText, key: inputSelect?.value, value: inputText },
     {
@@ -22,7 +26,7 @@ const getParams = ({
       key: "gender",
       value: genderValue,
     },
-    { condition: activePage, key: "page", value: activePage },
+    { condition: pageParam, key: "page", value: pageParam },
   ]
     .map(({ condition, key, value }) => {
       return `${condition ? `&${key}=${value}` : ""}`;
@@ -34,17 +38,28 @@ const getParams = ({
 };
 
 export const useGetCharacters = ({ inputSelect, ...rest }: ISearchState) => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ["characters", "list", inputSelect.value, ...Object.values(rest)],
-    queryFn: () => {
+    queryFn: ({ pageParam }) => {
       return axios.get<ICharactersData>(
-        `/character${getParams({ ...rest, inputSelect })}`,
+        `/character${getParams({ ...rest, inputSelect, pageParam })}`,
         {
           baseURL: "https://rickandmortyapi.com/api",
         }
       );
     },
-    select: (response) => response.data,
-    retry: 1,
+    select: (response) => {
+      return {
+        pages: response.pages.map(({ data }) => data),
+        pageParams: response.pageParams,
+      };
+    },
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, _, lastPageParam) => {
+      if (!lastPage.data.info.next) {
+        return null;
+      }
+      return lastPageParam + 1;
+    },
   });
 };

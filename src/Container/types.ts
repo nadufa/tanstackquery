@@ -13,5 +13,4 @@ export interface ISearchState {
   inputSelect: ComboboxItem;
   statusValue: StatusValueType;
   genderValue: GenderValueType;
-  activePage: number | null;
 }

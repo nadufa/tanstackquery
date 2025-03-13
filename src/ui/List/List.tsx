@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Center,
   Flex,
@@ -9,7 +10,7 @@ import {
 } from "@mantine/core";
 import clsx from "clsx";
 import { Dispatch, SetStateAction } from "react";
-import { ICharactersData } from "../../api/types";
+import { ICaracter } from "../../api/types";
 import { ErrorBlock } from "../ErrorBlock/ErrorBlock";
 import s from "./List.module.scss";
 
@@ -20,13 +21,19 @@ export const List = ({
   isError,
   selectedCharacter,
   setSelectedCharacter,
+  hasNextPage,
+  isFetchingNextPage,
+  fetchNextPage,
 }: {
-  data?: ICharactersData;
+  data: ICaracter[];
   refetch: () => void;
   selectedCharacter: number | null;
   isFetching: boolean;
   isError: boolean;
   setSelectedCharacter: Dispatch<SetStateAction<null | number>>;
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
+  fetchNextPage: () => void;
 }) => {
   const selectCharacterHandler = (id: number) => {
     setSelectedCharacter(selectedCharacter === id ? null : id);
@@ -58,22 +65,35 @@ export const List = ({
         overlayProps={{ blur: 1 }}
         loaderProps={{ color: "#7c609a", size: 100 }}
       />
-      {data &&
-        data.results.map(({ name, image, id }) => {
-          return (
-            <Flex
-              className={clsx(
-                s.characterItem,
-                selectedCharacter === id && s.selected
-              )}
-              key={id}
-              onClick={() => selectCharacterHandler(id)}
-            >
-              <Image className={s.characterItemImg} src={image} />
+      {data.map(({ name, image, id }) => {
+        return (
+          <Flex
+            className={clsx(
+              s.characterItem,
+              selectedCharacter === id && s.selected
+            )}
+            key={id}
+            onClick={() => selectCharacterHandler(id)}
+          >
+            <Image className={s.characterItemImg} src={image} />
+            <Box>
               <Title order={3}>Name: {name}</Title>
-            </Flex>
-          );
-        })}
+              <Title order={3}>ID: {id}</Title>
+            </Box>
+          </Flex>
+        );
+      })}
+      {hasNextPage && (
+        <Button
+          loading={isFetchingNextPage}
+          fullWidth
+          bg={"#7c609a"}
+          size="lg"
+          onClick={fetchNextPage}
+        >
+          Load more
+        </Button>
+      )}
     </ScrollArea>
   );
 };

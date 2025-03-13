@@ -41,7 +41,11 @@ export const Details = ({
   }
 
   if (!data) {
-    return <Center>No data</Center>;
+    return (
+      <Center h={"100%"} fz={"h3"} fw={"bold"}>
+        No data
+      </Center>
+    );
   }
 
   return (

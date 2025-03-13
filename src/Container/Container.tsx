@@ -1,7 +1,8 @@
-import { Box, Flex, Pagination, Title } from "@mantine/core";
+import { Box, Flex, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { ICaracter } from "../api/types";
 import { useGetCharacters } from "../api/useGetCharacters";
 import { Details } from "../ui/Details/Details";
 import { List } from "../ui/List/List";
@@ -29,7 +30,6 @@ const initialState: ISearchState = {
   },
   statusValue: "all",
   genderValue: "all",
-  activePage: null,
 };
 
 export const Container = () => {
@@ -40,10 +40,27 @@ export const Container = () => {
 
   const [debounced] = useDebouncedValue(searchState.inputText, 1000);
 
-  const { data, isFetching, isError, refetch } = useGetCharacters({
+  const {
+    data,
+    isFetching,
+    isError,
+    refetch,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useGetCharacters({
     ...searchState,
     inputText: debounced,
   });
+
+  const finalData: ICaracter[] = [];
+
+  if (data) {
+    data.pages.forEach(({ results }) => {
+      finalData.push(...results);
+    });
+  }
+  console.log(finalData);
 
   useEffect(
     () => setSelectedCharacter(null),
@@ -55,13 +72,6 @@ export const Container = () => {
     ]
   );
 
-  const setPageHandler = (value: number) => {
-    setSearchState({
-      ...searchState,
-      activePage: value,
-    });
-  };
-
   return (
     <Flex className={s.main}>
       <Flex className={s.container}>
@@ -71,23 +81,19 @@ export const Container = () => {
             <Box className={s.contentHeader}>
               <Title order={2}>List of characters</Title>
             </Box>
-            <List
-              data={data}
-              refetch={refetch}
-              isError={isError}
-              isFetching={isFetching}
-              selectedCharacter={selectedCharacter}
-              setSelectedCharacter={setSelectedCharacter}
-            />
-            <Flex className={s.contentFooter}>
-              <Pagination
-                value={searchState.activePage ?? 1}
-                color={"#7c609a"}
-                total={data?.info.pages ?? 10}
-                size="xl"
-                onChange={setPageHandler}
+            {finalData.length && (
+              <List
+                data={finalData}
+                refetch={refetch}
+                isError={isError}
+                isFetching={isFetching}
+                selectedCharacter={selectedCharacter}
+                setSelectedCharacter={setSelectedCharacter}
+                hasNextPage={hasNextPage}
+                isFetchingNextPage={isFetchingNextPage}
+                fetchNextPage={fetchNextPage}
               />
-            </Flex>
+            )}
           </Flex>
           <Flex className={clsx(s.details, s.contentPart)}>
             <Box className={s.contentHeader}>

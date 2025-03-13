@@ -16,7 +16,6 @@ export const Search = ({
     setSearchState({
       ...searchState,
       inputText: e.currentTarget.value,
-      activePage: null,
     });
   };
 
@@ -25,18 +24,18 @@ export const Search = ({
     value: string;
     disabled?: boolean;
   }) => {
-    setSearchState({ ...searchState, inputSelect: option, activePage: null });
+    setSearchState({ ...searchState, inputSelect: option });
   };
 
   const onChangeStatusHandler = (value: string) => {
     if (isStatusValueType(value)) {
-      setSearchState({ ...searchState, statusValue: value, activePage: null });
+      setSearchState({ ...searchState, statusValue: value });
     }
   };
 
   const onChangeGenderHandler = (value: string) => {
     if (isGenderValueType(value)) {
-      setSearchState({ ...searchState, genderValue: value, activePage: null });
+      setSearchState({ ...searchState, genderValue: value });
     }
   };
 
