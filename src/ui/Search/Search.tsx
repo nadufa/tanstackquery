@@ -1,7 +1,9 @@
 import { Flex, Input, SegmentedControl, Select } from "@mantine/core";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { ISearchState } from "../../Container/Container";
+import { ISearchState } from "../../Container/types";
 import s from "./Search.module.scss";
+import { genderValueData, inputSelectData, statusValueData } from "./constants";
+import { isGenderValueType, isStatusValueType } from "./predicates";
 
 export const Search = ({
   searchState,
@@ -11,7 +13,11 @@ export const Search = ({
   setSearchState: Dispatch<SetStateAction<ISearchState>>;
 }) => {
   const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchState({ ...searchState, inputText: e.currentTarget.value });
+    setSearchState({
+      ...searchState,
+      inputText: e.currentTarget.value,
+      activePage: null,
+    });
   };
 
   const onChangeSelectHandler = (option: {
@@ -19,15 +25,19 @@ export const Search = ({
     value: string;
     disabled?: boolean;
   }) => {
-    setSearchState({ ...searchState, inputSelect: option });
+    setSearchState({ ...searchState, inputSelect: option, activePage: null });
   };
 
   const onChangeStatusHandler = (value: string) => {
-    setSearchState({ ...searchState, statusValue: value });
+    if (isStatusValueType(value)) {
+      setSearchState({ ...searchState, statusValue: value, activePage: null });
+    }
   };
 
   const onChangeGenderHandler = (value: string) => {
-    setSearchState({ ...searchState, genderValue: value });
+    if (isGenderValueType(value)) {
+      setSearchState({ ...searchState, genderValue: value, activePage: null });
+    }
   };
 
   return (
@@ -35,17 +45,13 @@ export const Search = ({
       <Flex className={s.searchBlock}>
         <Input
           value={searchState.inputText}
-          onChange={(e) => onChangeInputHandler(e)}
+          onChange={onChangeInputHandler}
           className={s.search}
           placeholder="Search"
         />
         <Select
           flex={1}
-          data={[
-            { value: "name", label: "Name" },
-            { value: "species", label: "Species" },
-            { value: "type", label: "Type" },
-          ]}
+          data={inputSelectData}
           value={searchState.inputSelect.value}
           onChange={(_value, option) => {
             onChangeSelectHandler(option);
@@ -57,30 +63,17 @@ export const Search = ({
         <SegmentedControl
           withItemsBorders={false}
           w={"40%"}
-          data={[
-            { value: "all", label: "All" },
-            { value: "alive", label: "Alive" },
-            { value: "dead", label: "Dead" },
-            { value: "unknown", label: "Unknown" },
-          ]}
-          onChange={(value) => {
-            onChangeStatusHandler(value);
-          }}
+          data={statusValueData}
+          value={searchState.statusValue}
+          onChange={onChangeStatusHandler}
           size="lg"
         />
         <SegmentedControl
           withItemsBorders={false}
           w={"60%"}
-          data={[
-            { value: "all", label: "All" },
-            { value: "female", label: "Female" },
-            { value: "male", label: "Male" },
-            { value: "genderless", label: "Genderless" },
-            { value: "unknown", label: "Unknown" },
-          ]}
-          onChange={(value) => {
-            onChangeGenderHandler(value);
-          }}
+          data={genderValueData}
+          value={searchState.genderValue}
+          onChange={onChangeGenderHandler}
           size="lg"
         />
       </Flex>

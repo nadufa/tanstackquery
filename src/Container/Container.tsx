@@ -1,12 +1,13 @@
-import { Box, ComboboxItem, Flex, Title } from "@mantine/core";
+import { Box, Flex, Pagination, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetCharacters } from "../api/useGetCharacters";
 import { Details } from "../ui/Details/Details";
 import { List } from "../ui/List/List";
 import { Search } from "../ui/Search/Search";
 import s from "./Container.module.scss";
+import { ISearchState } from "./types";
 
 // const debounce = (callback: () => void) => {
 //   let timerId: number;
@@ -19,27 +20,23 @@ import s from "./Container.module.scss";
 //   };
 // };
 
-export interface ISearchState {
-  inputText: string;
-  inputSelect: ComboboxItem;
-  statusValue: string;
-  genderValue: string;
-}
+const initialState: ISearchState = {
+  inputText: "",
+  inputSelect: {
+    value: "name",
+    label: "Name",
+    disabled: false,
+  },
+  statusValue: "all",
+  genderValue: "all",
+  activePage: null,
+};
 
 export const Container = () => {
   const [selectedCharacter, setSelectedCharacter] = useState<number | null>(
     null
   );
-  const [searchState, setSearchState] = useState<ISearchState>({
-    inputText: "",
-    inputSelect: {
-      value: "name",
-      label: "Name",
-      disabled: false,
-    },
-    statusValue: "all",
-    genderValue: "all",
-  });
+  const [searchState, setSearchState] = useState(initialState);
 
   const [debounced] = useDebouncedValue(searchState.inputText, 1000);
 
@@ -47,6 +44,23 @@ export const Container = () => {
     ...searchState,
     inputText: debounced,
   });
+
+  useEffect(
+    () => setSelectedCharacter(null),
+    [
+      searchState.genderValue,
+      searchState.inputSelect.value,
+      debounced,
+      searchState.statusValue,
+    ]
+  );
+
+  const setPageHandler = (value: number) => {
+    setSearchState({
+      ...searchState,
+      activePage: value,
+    });
+  };
 
   return (
     <Flex className={s.main}>
@@ -65,6 +79,15 @@ export const Container = () => {
               selectedCharacter={selectedCharacter}
               setSelectedCharacter={setSelectedCharacter}
             />
+            <Flex className={s.contentFooter}>
+              <Pagination
+                value={searchState.activePage ?? 1}
+                color={"#7c609a"}
+                total={data?.info.pages ?? 10}
+                size="xl"
+                onChange={setPageHandler}
+              />
+            </Flex>
           </Flex>
           <Flex className={clsx(s.details, s.contentPart)}>
             <Box className={s.contentHeader}>

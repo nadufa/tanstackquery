@@ -33,7 +33,11 @@ export const Details = ({
   }
 
   if (!selectedCharacter && !isFetching) {
-    return <Center>Select character</Center>;
+    return (
+      <Center h={"100%"} fz={"h3"} fw={"bold"}>
+        Select character
+      </Center>
+    );
   }
 
   if (!data) {

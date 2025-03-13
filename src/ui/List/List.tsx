@@ -66,7 +66,7 @@ export const List = ({
                 s.characterItem,
                 selectedCharacter === id && s.selected
               )}
-              key={name}
+              key={id}
               onClick={() => selectCharacterHandler(id)}
             >
               <Image className={s.characterItemImg} src={image} />
