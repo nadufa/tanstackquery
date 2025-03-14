@@ -7,6 +7,7 @@ import {
   LoadingOverlay,
   ScrollArea,
   Table,
+  Title,
 } from "@mantine/core";
 import { useGetSelectedCharacter } from "../../api/useGetSelectedCharacter";
 import { ErrorBlock } from "../ErrorBlock/ErrorBlock";
@@ -49,26 +50,38 @@ export const Details = ({
   }
 
   return (
-    <Flex flex={1} pos={"relative"} direction={"column"} h={"95%"}>
+    <Flex flex={1} pos={"relative"} direction={"column"} h={"95%"} p={30}>
       <LoadingOverlay
         visible={isFetching}
         zIndex={1000}
         overlayProps={{ blur: 1 }}
         loaderProps={{ color: "#7c609a", size: 100 }}
       />
-      <Box h={"30%"} p={0}>
-        <Image h={"100%"} fit="fill" src={data?.image} />
-      </Box>
+      <Flex align={"center"} justify={"center"} gap={50} h={"300px"} p={0}>
+        <Image
+          className={s.characterImg}
+          src={data?.image}
+          style={{ borderRadius: "50px" }}
+        />
+        <Box>
+          <Title order={3}>Name: {data?.name}</Title>
+          <Title order={3}>ID: {data?.id}</Title>
+        </Box>
+      </Flex>
 
       <ScrollArea.Autosize className={s.contentBody}>
         <Table>
-          <Table.Tbody>
-            {Object.entries(data).map(([field, info]) => (
-              <Table.Tr key={field}>
-                <Table.Th>{field}</Table.Th>
-                <Table.Td>{info}</Table.Td>
-              </Table.Tr>
-            ))}
+          <Table.Tbody className={s.tableBody}>
+            {Object.entries(data)
+              .filter(([field]) => {
+                return field !== "name" && field !== "id";
+              })
+              .map(([field, info]) => (
+                <Table.Tr key={field}>
+                  <Table.Th>{field}</Table.Th>
+                  <Table.Td>{info}</Table.Td>
+                </Table.Tr>
+              ))}
           </Table.Tbody>
         </Table>
       </ScrollArea.Autosize>

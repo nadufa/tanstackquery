@@ -1,5 +1,40 @@
 @use '../../app/mixins.scss';
 
+
+.characterImg {
+  height: 100%;
+  border-radius: 15px;
+  border: 6px solid #745494;
+
+  &:hover {
+    border: 6px solid rgba(116, 84, 148, 0.799)
+  }
+}
+
 .contentBody {
   @include mixins.scroll-styles;
+
+  align-items: center;
+  
+  &>div {
+    width: 100%;
+  }
+
+  .tableBody {
+    font-size: large;
+    background-color: #c4b6d03b;
+
+
+    tr {
+      border : 3px solid #745494;
+
+      &:hover {
+        background-color: #a6b6e73b;
+      }
+
+      th {
+        border : 1px solid #745494;
+      }
+    }
+  }
 }
