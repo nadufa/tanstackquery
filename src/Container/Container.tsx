@@ -5,21 +5,11 @@ import { useEffect, useState } from "react";
 import { ICaracter } from "../api/types";
 import { useGetCharacters } from "../api/useGetCharacters";
 import { Details } from "../ui/Details/Details";
-import { List } from "../ui/List/List";
 import { Search } from "../ui/Search/Search";
 import s from "./Container.module.scss";
+
+import { VirtualList } from "../ui/VirtualList/VirtualList";
 import { ISearchState } from "./types";
-
-// const debounce = (callback: () => void) => {
-//   let timerId: number;
-
-//   return () => {
-//     clearTimeout(timerId);
-//     timerId = setTimeout(() => {
-//       callback();
-//     }, 3000);
-//   };
-// };
 
 const initialState: ISearchState = {
   inputText: "",
@@ -60,7 +50,6 @@ export const Container = () => {
       finalData.push(...results);
     });
   }
-  console.log(finalData);
 
   useEffect(
     () => setSelectedCharacter(null),
@@ -82,7 +71,7 @@ export const Container = () => {
               <Title order={2}>List of characters</Title>
             </Box>
             {finalData.length && (
-              <List
+              <VirtualList
                 data={finalData}
                 refetch={refetch}
                 isError={isError}
