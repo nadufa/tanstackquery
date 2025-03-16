@@ -1,7 +1,8 @@
-import { Box, Button, Center, Flex, Image, Title } from "@mantine/core";
+import { Button, Center, Flex } from "@mantine/core";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import clsx from "clsx";
 import { Dispatch, SetStateAction, useRef } from "react";
+import { CharacterCard } from "../../../entities";
 import { ICaracter } from "../../api/types";
 import { ErrorBlock } from "../ErrorBlock/ErrorBlock";
 import s from "./VirtualList.module.scss";
@@ -27,10 +28,6 @@ export const VirtualList = ({
   isFetchingNextPage: boolean;
   fetchNextPage: () => void;
 }) => {
-  const selectCharacterHandler = (id: number) => {
-    setSelectedCharacter(selectedCharacter === id ? null : id);
-  };
-
   const itemsCount = data.length;
 
   const parentRef = useRef(null);
@@ -63,29 +60,16 @@ export const VirtualList = ({
           const { id, image, name } = data[virtualItem.index];
 
           return (
-            <Flex
-              key={virtualItem.index}
-              className={s.itemContainer}
-              h={`${virtualItem.size}px`}
-              style={{
-                transform: `translateY(${virtualItem.start}px)`,
-              }}
-            >
-              <Flex
-                className={clsx(
-                  s.characterItem,
-                  selectedCharacter === id && s.selected
-                )}
-                key={id}
-                onClick={() => selectCharacterHandler(id)}
-              >
-                <Image className={s.characterItemImg} src={image} />
-                <Box>
-                  <Title order={3}>Name: {name}</Title>
-                  <Title order={3}>ID: {id}</Title>
-                </Box>
-              </Flex>
-            </Flex>
+            <CharacterCard
+              id={id}
+              image={image}
+              name={name}
+              index={virtualItem.index}
+              size={virtualItem.size}
+              start={virtualItem.start}
+              selectedCharacter={selectedCharacter}
+              setSelectedCharacter={setSelectedCharacter}
+            />
           );
         })}
         {hasNextPage ? (

@@ -2,13 +2,13 @@ import { Box, Flex, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { ICaracter } from "../api/types";
-import { useGetCharacters } from "../api/useGetCharacters";
-import { Details } from "../ui/Details/Details";
-import { Search } from "../ui/Search/Search";
-import s from "./Container.module.scss";
+import { ICaracter } from "../../shared/api/types";
+import { useGetCharacters } from "../../shared/api/useGetCharacters";
+import s from "./HomePage.module.scss";
 
-import { VirtualList } from "../ui/VirtualList/VirtualList";
+import { CharacterDetails } from "../../entities";
+import { SearchBar } from "../../features";
+import { VirtualList } from "../../shared/ui/VirtualList/VirtualList";
 import { ISearchState } from "./types";
 
 const initialState: ISearchState = {
@@ -22,7 +22,7 @@ const initialState: ISearchState = {
   genderValue: "all",
 };
 
-export const Container = () => {
+export const HomePage = () => {
   const [selectedCharacter, setSelectedCharacter] = useState<number | null>(
     null
   );
@@ -64,7 +64,7 @@ export const Container = () => {
   return (
     <Flex className={s.main}>
       <Flex className={s.container}>
-        <Search searchState={searchState} setSearchState={setSearchState} />
+        <SearchBar searchState={searchState} setSearchState={setSearchState} />
 
         <Flex className={s.contentBlock}>
           <Flex className={clsx(s.list, s.contentPart)}>
@@ -89,7 +89,7 @@ export const Container = () => {
             <Box className={s.contentHeader}>
               <Title order={2}>Character information</Title>
             </Box>
-            <Details selectedCharacter={selectedCharacter} />
+            <CharacterDetails selectedCharacter={selectedCharacter} />
           </Flex>
         </Flex>
       </Flex>

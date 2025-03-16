@@ -1,17 +1,11 @@
 import { Flex, Input, SegmentedControl, Select } from "@mantine/core";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { ISearchState } from "../../Container/types";
-import s from "./Search.module.scss";
+import { ChangeEvent } from "react";
+import s from "./SearchBar.module.scss";
 import { genderValueData, inputSelectData, statusValueData } from "./constants";
 import { isGenderValueType, isStatusValueType } from "./predicates";
+import { ISearchBar } from "./types";
 
-export const Search = ({
-  searchState,
-  setSearchState,
-}: {
-  searchState: ISearchState;
-  setSearchState: Dispatch<SetStateAction<ISearchState>>;
-}) => {
+export const SearchBar = ({ searchState, setSearchState }: ISearchBar) => {
   const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchState({
       ...searchState,

@@ -1,4 +1,4 @@
-import { GenderValueType, StatusValueType } from "../../Container/types";
+import { GenderValueType, StatusValueType } from "../../pages/HomePage/types";
 
 export const isStatusValueType = (value: string): value is StatusValueType => {
   return (

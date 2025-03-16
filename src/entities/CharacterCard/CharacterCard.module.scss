@@ -1,12 +1,4 @@
-.contentContainer {  
-  overflow: auto;
-  padding-right: 15px;
-
-  .content {
-    position: relative;
-    width: 100%;
-
-    .itemContainer {
+.itemContainer {
       position: absolute;
       padding: 15px 0;
       top: 0;
@@ -39,21 +31,3 @@
           }
       } 
     }
-
-    .lastBlock {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      background-color: #433b5b25;
-      border-radius: 10px;
-      height: 50px;
-
-      &.loadButton {        
-        background-color: #7c609a;
-        &:hover {
-          background-color: #7c609af0;
-        }
-      }
-    }
-  }
-}

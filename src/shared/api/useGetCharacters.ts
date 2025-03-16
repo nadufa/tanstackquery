@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { ISearchState } from "../Container/types";
+import { ISearchState } from "../../pages/HomePage/types";
 import { ICharactersData } from "./types";
 
 interface GetParamsType extends ISearchState {

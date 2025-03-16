@@ -9,16 +9,13 @@ import {
   Table,
   Title,
 } from "@mantine/core";
-import { useGetSelectedCharacter } from "../../api/useGetSelectedCharacter";
-import { ErrorBlock } from "../ErrorBlock/ErrorBlock";
+import { useGetSelectedCharacter } from "../../shared/api/useGetSelectedCharacter";
+import { ErrorBlock } from "../../shared/ui/ErrorBlock/ErrorBlock";
 
-import s from "./Details.module.scss";
+import s from "./CharacterDetails.module.scss";
+import { ICharacterDetails } from "./types";
 
-export const Details = ({
-  selectedCharacter,
-}: {
-  selectedCharacter: number | null;
-}) => {
+export const CharacterDetails = ({ selectedCharacter }: ICharacterDetails) => {
   const { data, isFetching, isError, refetch } = useGetSelectedCharacter({
     selectedCharacterId: selectedCharacter,
   });
