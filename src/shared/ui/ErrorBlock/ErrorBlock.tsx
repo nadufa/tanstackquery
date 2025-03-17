@@ -1,8 +1,8 @@
 import { Flex, Title } from "@mantine/core";
-import { ReactNode } from "react";
 import s from "./ErrorBlock.module.scss";
+import { IErrorBlock } from "./types";
 
-export const ErrorBlock = ({ children }: { children?: ReactNode }) => {
+export const ErrorBlock = ({ children }: IErrorBlock) => {
   return (
     <Flex className={s.errorBlock}>
       <Title order={2}>Oops, an error occured!</Title>

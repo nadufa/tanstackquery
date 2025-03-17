@@ -1,0 +1,1 @@
+export { VirtualCharactersList } from "./VirtualCharactersList";
