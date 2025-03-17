@@ -1,5 +1,6 @@
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+import { axiosInstance } from "../../../shared/api";
 import { ISearchState } from "../../../shared/types";
 import { getParams } from "./lib";
 import { ICharactersData } from "./types";
@@ -9,11 +10,8 @@ const fetchCharacters = ({
   inputSelect,
   ...rest
 }: ISearchState & { pageParam: number }) => {
-  return axios.get<ICharactersData>(
-    `/character${getParams({ ...rest, inputSelect, pageParam })}`,
-    {
-      baseURL: import.meta.env.VITE_BASE_URL,
-    }
+  return axiosInstance.get<ICharactersData>(
+    `/character${getParams({ ...rest, inputSelect, pageParam })}`
   );
 };
 

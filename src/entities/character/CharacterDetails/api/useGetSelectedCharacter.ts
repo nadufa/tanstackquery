@@ -1,5 +1,5 @@
 import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import { axiosInstance } from "../../../../shared/api";
 import { ICaracter } from "../model";
 
 export const fetchSelectedCharacter = ({
@@ -17,9 +17,8 @@ export const fetchSelectedCharacter = ({
       return queryKey[queryKey.length - 1] === String(id);
     },
   });
-  return axios.get<ICaracter>(`/character/${id}`, {
-    baseURL: import.meta.env.VITE_BASE_URL,
-    signal: signal,
+  return axiosInstance.get<ICaracter>(`/character/${id}`, {
+    signal,
   });
 };
 export const selectCharacter = (data: ICaracter) =>
