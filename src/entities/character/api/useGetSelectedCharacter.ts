@@ -1,6 +1,6 @@
 import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
-import { axiosInstance } from "../../../../shared/api";
-import { ICaracter } from "../model";
+import { axiosInstance } from "../../../shared/api";
+import { ICharacter } from "./model";
 
 export const fetchSelectedCharacter = ({
   queryClient,
@@ -17,14 +17,14 @@ export const fetchSelectedCharacter = ({
       return queryKey[queryKey.length - 1] === String(id);
     },
   });
-  return axiosInstance.get<ICaracter>(`/character/${id}`, {
+  return axiosInstance.get<ICharacter>(`/character/${id}`, {
     signal,
   });
 };
-export const selectCharacter = (data: ICaracter) =>
+export const selectCharacter = (data: ICharacter) =>
   Object.fromEntries(
     Object.entries(data).filter((el) => typeof el[1] !== "object")
-  );
+  ) as ICharacter;
 
 export const useGetSelectedCharacter = ({
   selectedCharacterId,

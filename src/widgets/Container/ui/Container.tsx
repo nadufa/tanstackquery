@@ -2,12 +2,13 @@ import { Box, Flex, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
-import { CharacterDetails } from "../../../entities";
-import { ICaracter } from "../../../entities/character";
+import { ICharacter } from "../../../entities/character";
 import { useGetCharacters } from "../../../entities/character/api";
 import { SearchBar } from "../../../features";
 import { initialState } from "../../../pages/HomePage/lib";
-import { VirtualCharactersList } from "../../VirtualCharactersList";
+import { Button } from "../../../shared/ui";
+import { CharactersList } from "../../CharactersList/ui/CharactersList";
+import { CharacterInfo } from "../../ChatacterInfo";
 import s from "./Container.module.scss";
 
 export const Container = () => {
@@ -17,7 +18,6 @@ export const Container = () => {
   const [searchState, setSearchState] = useState(initialState);
 
   const [debounced] = useDebouncedValue(searchState.inputText, 1000);
-
   const {
     data,
     isFetching,
@@ -31,11 +31,11 @@ export const Container = () => {
     inputText: debounced,
   });
 
-  const finalData: ICaracter[] = useMemo(() => {
+  const finalData: ICharacter[] = useMemo(() => {
     return data
       ? data.pages.reduce((result, current) => {
           return [...result, ...current.results];
-        }, [] as ICaracter[])
+        }, [] as ICharacter[])
       : [];
   }, [data]);
 
@@ -59,13 +59,15 @@ export const Container = () => {
             <Title order={2}>List of characters</Title>
           </Box>
 
-          <VirtualCharactersList
+          <CharactersList
             data={finalData}
-            refetch={refetch}
             isError={isError}
-            isFetching={isFetching}
+            isLoading={isFetching && !isFetchingNextPage}
             selectedCharacter={selectedCharacter}
             setSelectedCharacter={setSelectedCharacter}
+            errorBlockChildren={
+              <Button onClick={() => refetch()}>Try again</Button>
+            }
             hasNextPage={hasNextPage}
             isFetchingNextPage={isFetchingNextPage}
             fetchNextPage={fetchNextPage}
@@ -76,7 +78,7 @@ export const Container = () => {
           <Box className={s.contentHeader}>
             <Title order={2}>Character information</Title>
           </Box>
-          <CharacterDetails selectedCharacter={selectedCharacter} />
+          <CharacterInfo selectedCharacterId={selectedCharacter} />
         </Flex>
       </Flex>
     </Flex>

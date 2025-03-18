@@ -1,4 +1,4 @@
-export interface ICaracter {
+export interface ICharacter {
   created: string;
   episode: string[];
   gender: string;

@@ -1,2 +1,2 @@
-export * from "./CharacterCard";
-export * from "./CharacterDetails";
+export * from "./ui";
+export * from "./api";

@@ -1,2 +1,2 @@
-export { CharacterCard } from "./character/CharacterCard";
-export { CharacterDetails } from "./character/CharacterDetails";
+export { CharacterCard } from "./character/ui/CharacterCard";
+export { CharacterDetails } from "./character/ui/CharacterDetails";

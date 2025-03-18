@@ -1,4 +1,4 @@
-import { ICaracter } from "../../entities/character";
+import { ICharacter } from "../ui/CharacterDetails";
 
 export interface ICharactersData {
   info: {
@@ -7,5 +7,5 @@ export interface ICharactersData {
     pages: number;
     prev: string | null;
   };
-  results: ICaracter[];
+  results: ICharacter[];
 }

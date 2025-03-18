@@ -1,2 +1,2 @@
 export { withQueryStatus } from "./withQueryStatus";
-export { withVirtualizer } from "./withVirtualizer/ui";
+export { withVirtualizer } from "./withVirtualizer";

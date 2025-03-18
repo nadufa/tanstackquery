@@ -1,1 +1,0 @@
-export { VirtualCharactersList } from "./VirtualCharactersList";
