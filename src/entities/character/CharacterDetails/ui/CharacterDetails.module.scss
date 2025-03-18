@@ -20,21 +20,23 @@
     width: 100%;
   }
 
-  .tableBody {
-    font-size: large;
-    background-color: #c4b6d03b;
+
+}
+
+.tableBody {
+  font-size: large;
+  background-color: #c4b6d03b;
 
 
-    tr {
-      border : 3px solid #745494;
+  tr {
+    border : 3px solid #745494;
 
-      &:hover {
-        background-color: #a6b6e73b;
-      }
+    &:hover {
+      background-color: #a6b6e73b;
+    }
 
-      th {
-        border : 1px solid #745494;
-      }
+    th {
+      border : 1px solid #745494;
     }
   }
 }
