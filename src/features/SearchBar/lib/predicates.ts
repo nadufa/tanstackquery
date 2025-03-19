@@ -1,7 +1,4 @@
-import {
-  GenderValueType,
-  StatusValueType,
-} from "../../../shared/types/searchType";
+import { GenderValueType, StatusValueType } from "@/shared/types/searchType";
 
 export const isStatusValueType = (value: string): value is StatusValueType => {
   return (

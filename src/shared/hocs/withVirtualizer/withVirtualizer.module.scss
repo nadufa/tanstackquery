@@ -1,0 +1,9 @@
+.contentContainer {  
+  overflow: auto;
+  padding-right: 15px;
+
+  .content {
+    position: relative;
+    width: 100%;
+  }
+}

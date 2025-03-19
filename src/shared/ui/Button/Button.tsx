@@ -1,12 +1,5 @@
-import {
-  Button as MantineButton,
-  ButtonProps as MantineButtonProps,
-} from "@mantine/core";
-import { MouseEvent } from "react";
-
-export interface IButton extends MantineButtonProps {
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
-}
+import { Button as MantineButton } from "@mantine/core";
+import { IButton } from "./types";
 
 export const Button = ({ children, onClick, ...restProps }: IButton) => {
   return (

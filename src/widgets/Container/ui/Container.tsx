@@ -1,14 +1,12 @@
-import { Box, Flex, Title } from "@mantine/core";
+import { ICharacter, useGetCharacters } from "@/entities/character";
+import { SearchBar } from "@/features";
+import { initialState } from "@/pages/HomePage/lib";
+import { CharactersList } from "@/widgets/CharactersList";
+import { CharacterInfo } from "@/widgets/ChatacterInfo";
+import { Box, Button, Flex, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
-import { ICharacter } from "../../../entities/character";
-import { useGetCharacters } from "../../../entities/character/api";
-import { SearchBar } from "../../../features";
-import { initialState } from "../../../pages/HomePage/lib";
-import { Button } from "../../../shared/ui";
-import { CharactersList } from "../../CharactersList/ui/CharactersList";
-import { CharacterInfo } from "../../ChatacterInfo";
 import s from "./Container.module.scss";
 
 export const Container = () => {

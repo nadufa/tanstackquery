@@ -1,7 +1,7 @@
+import { axiosInstance } from "@/shared/api";
+import { ISearchState } from "@/shared/types";
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
-import { axiosInstance } from "../../../shared/api";
-import { ISearchState } from "../../../shared/types";
 import { getParams } from "./lib";
 import { ICharactersData } from "./types";
 

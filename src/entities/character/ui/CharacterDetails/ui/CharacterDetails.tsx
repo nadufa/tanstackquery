@@ -1,12 +1,12 @@
 import { Box, Flex, Image, Table, Title } from "@mantine/core";
 
+import { withQueryStatus, withVirtualizer } from "@/shared/hocs";
 import { VirtualItem } from "@tanstack/react-virtual";
 import { ReactNode, useCallback, useMemo } from "react";
-import { withQueryStatus } from "../../../../../shared/hocs";
-import { IWithQueryStatus } from "../../../../../shared/hocs/withQueryStatus/types";
-import { withVirtualizer } from "../../../../../shared/hocs/withVirtualizer/withVirtualizer";
+
 import s from "./CharacterDetails.module.scss";
 import { ICharacterDetails } from "./types";
+import { IWithQueryStatus } from "@/shared/hocs/withQueryStatus/types";
 
 const TableContainer = ({ children }: { children: ReactNode }) => {
   return (

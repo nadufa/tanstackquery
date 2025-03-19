@@ -1,6 +1,6 @@
+import { withConsoleLog } from "@/shared/hocs";
 import { Box, Flex, Image, Title } from "@mantine/core";
 import clsx from "clsx";
-import { withConsoleLog } from "../../../../../shared/hocs/withConsoleLog/withConsoleLog";
 import s from "./CharacterCard.module.scss";
 import { ICharacterCard } from "./types";
 

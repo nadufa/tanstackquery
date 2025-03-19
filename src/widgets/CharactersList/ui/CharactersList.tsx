@@ -1,6 +1,6 @@
-import { CharacterCard } from "../../../entities";
-import { withQueryStatus, withVirtualizer } from "../../../shared/hocs";
-import { IWithQueryStatus } from "../../../shared/hocs/withQueryStatus/types";
+import { CharacterCard } from "@/entities";
+import { withQueryStatus, withVirtualizer } from "@/shared/hocs";
+import { IWithQueryStatus } from "@/shared/hocs/withQueryStatus/types";
 import { LoadMoreBlock, LoadMoreType } from "./LoadMoreBlock";
 import { IVirtualCharactersList } from "./types";
 

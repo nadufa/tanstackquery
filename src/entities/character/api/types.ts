@@ -1,4 +1,4 @@
-import { ICharacter } from "../ui/CharacterDetails";
+import { ICharacter } from "./model";
 
 export interface ICharactersData {
   info: {

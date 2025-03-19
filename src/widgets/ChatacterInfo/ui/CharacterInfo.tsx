@@ -1,6 +1,6 @@
-import { CharacterDetails } from "../../../entities";
-import { useGetSelectedCharacter } from "../../../entities/character";
-import { Button } from "../../../shared/ui";
+import { CharacterDetails } from "@/entities";
+import { useGetSelectedCharacter } from "@/entities/character";
+import { Button } from "@mantine/core";
 import { ICharacterInfo } from "./types";
 
 export const CharacterInfo = ({ selectedCharacterId }: ICharacterInfo) => {

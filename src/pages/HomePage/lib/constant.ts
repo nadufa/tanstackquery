@@ -1,4 +1,4 @@
-import { ISearchState } from "../../../shared/types";
+import { ISearchState } from "@/shared/types";
 
 export const initialState: ISearchState = {
   inputText: "",

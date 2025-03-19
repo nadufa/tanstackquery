@@ -1,5 +1,6 @@
+import { Button } from "@/shared/ui";
 import { Center } from "@mantine/core";
-import { Button } from "../../../../shared/ui";
+import s from "./LoadMoreBlock.module.scss";
 import { LoadMoreType } from "./types";
 
 export const LoadMoreBlock = ({
@@ -12,21 +13,14 @@ export const LoadMoreBlock = ({
       fullWidth
       pos={"absolute"}
       bottom={0}
+      className={s.content}
       onClick={() => fetchNextPage()}
       loading={isFetchingNextPage}
     >
       Load more
     </Button>
   ) : (
-    <Center
-      pos={"absolute"}
-      bottom={0}
-      bg={"gray"}
-      w={"100%"}
-      fz={"h3"}
-      fw={"bold"}
-      h={50}
-    >
+    <Center className={s.content} bg={"#fff"} fz={"h3"} fw={"bold"}>
       No more data
     </Center>
   );

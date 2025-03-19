@@ -2,7 +2,7 @@ import { Flex } from "@mantine/core";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { ComponentType, ReactNode, useRef } from "react";
 import { IWithVirtualizer, IWithVirtualizerConfig } from "./types";
-import s from "./Virtualizer.module.scss";
+import s from "./withVirtualizer.module.scss";
 
 export const withVirtualizer = ({
   estimateSize,

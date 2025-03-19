@@ -1,4 +1,4 @@
-import { ISearchState } from "../../../../shared/types";
+import { ISearchState } from "@/shared/types";
 
 interface GetParamsType extends ISearchState {
   pageParam: number;

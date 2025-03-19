@@ -1,6 +1,6 @@
+import { ErrorBlock } from "@/shared/ui";
 import { Box, Center, LoadingOverlay } from "@mantine/core";
 import { ComponentType } from "react";
-import { ErrorBlock } from "../../ui";
 import { IWithQueryStatus } from "./types";
 
 export const withQueryStatus = <T extends IWithQueryStatus>(
