@@ -1,9 +1,10 @@
 import { Box, Flex, Image, Title } from "@mantine/core";
 import clsx from "clsx";
+import { withConsoleLog } from "../../../../../shared/hocs/withConsoleLog/withConsoleLog";
 import s from "./CharacterCard.module.scss";
 import { ICharacterCard } from "./types";
 
-export const CharacterCard = ({
+const BaseCharacterCard = ({
   id,
   name,
   image,
@@ -41,3 +42,5 @@ export const CharacterCard = ({
     </Flex>
   );
 };
+
+export const CharacterCard = withConsoleLog(BaseCharacterCard, "MyCard");
