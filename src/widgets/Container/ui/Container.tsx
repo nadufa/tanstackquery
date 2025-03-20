@@ -1,12 +1,13 @@
-import { ICharacter, useGetCharacters } from "@/entities/character";
+import { useGetCharacters } from "@/entities/character";
 import { SearchBar } from "@/features";
 import { initialState } from "@/pages/HomePage/lib";
+import { Button } from "@/shared/ui";
 import { CharactersList } from "@/widgets/CharactersList";
 import { CharacterInfo } from "@/widgets/ChatacterInfo";
-import { Box, Button, Flex, Title } from "@mantine/core";
+import { Box, Flex, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import s from "./Container.module.scss";
 
 export const Container = () => {
@@ -29,14 +30,6 @@ export const Container = () => {
     inputText: debounced,
   });
 
-  const finalData: ICharacter[] = useMemo(() => {
-    return data
-      ? data.pages.reduce((result, current) => {
-          return [...result, ...current.results];
-        }, [] as ICharacter[])
-      : [];
-  }, [data]);
-
   useEffect(
     () => setSelectedCharacter(null),
     [
@@ -58,7 +51,7 @@ export const Container = () => {
           </Box>
 
           <CharactersList
-            data={finalData}
+            data={data ? data.pages : []}
             isError={isError}
             isLoading={isFetching && !isFetchingNextPage}
             selectedCharacter={selectedCharacter}

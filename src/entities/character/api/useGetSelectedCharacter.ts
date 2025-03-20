@@ -17,10 +17,11 @@ export const fetchSelectedCharacter = ({
       return queryKey[queryKey.length - 1] === String(id);
     },
   });
-  return axiosInstance.get<ICharacter>(`/character/${id}`, {
+  return axiosInstance.get<ICharacter>(`/characters/${id}`, {
     signal,
   });
 };
+
 export const selectCharacter = (data: ICharacter) =>
   Object.fromEntries(
     Object.entries(data).filter((el) => typeof el[1] !== "object")

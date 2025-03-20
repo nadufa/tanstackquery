@@ -1,7 +1,8 @@
 import { ISearchState } from "@/shared/types";
 
-interface GetParamsType extends ISearchState {
+export interface IGetParams extends ISearchState {
   pageParam: number;
+  limit?: number;
 }
 
 export const getParams = ({
@@ -10,20 +11,22 @@ export const getParams = ({
   inputText,
   statusValue,
   pageParam,
-}: GetParamsType) => {
+  limit = 20,
+}: IGetParams) => {
   const params = [
-    { condition: inputText, key: inputSelect?.value, value: inputText },
+    { condition: inputText, key: inputSelect?.value + "_eq", value: inputText },
     {
       condition: statusValue && statusValue !== "all",
-      key: "status",
+      key: "status_eq",
       value: statusValue,
     },
     {
       condition: genderValue && genderValue !== "all",
-      key: "gender",
+      key: "gender_eq",
       value: genderValue,
     },
     { condition: pageParam, key: "page", value: pageParam },
+    { condition: true, key: "limit", value: limit },
   ]
     .map(({ condition, key, value }) => {
       return `${condition ? `&${key}=${value}` : ""}`;

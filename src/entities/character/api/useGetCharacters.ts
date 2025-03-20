@@ -3,23 +3,22 @@ import { ISearchState } from "@/shared/types";
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { getParams } from "./lib";
-import { ICharactersData } from "./types";
+import { IGetParams } from "./lib/getParams";
+import { ICharacter } from "./model";
 
-const fetchCharacters = ({
-  pageParam,
-  inputSelect,
-  ...rest
-}: ISearchState & { pageParam: number }) => {
-  return axiosInstance.get<ICharactersData>(
-    `/character${getParams({ ...rest, inputSelect, pageParam })}`
+const PAGE_LIMIT = 20;
+
+const fetchCharacters = ({ pageParam, inputSelect, ...rest }: IGetParams) => {
+  return axiosInstance.get<ICharacter[]>(
+    `/characters${getParams({ ...rest, inputSelect, pageParam, limit: PAGE_LIMIT })}`
   );
 };
 
 export const selectCharacters = (
-  response: InfiniteData<AxiosResponse<ICharactersData, unknown>, number>
+  response: InfiniteData<AxiosResponse<ICharacter[], unknown>, number>
 ) => {
   return {
-    pages: response.pages.map(({ data }) => data),
+    pages: response.pages.flatMap(({ data }) => data),
     pageParams: response.pageParams,
   };
 };
@@ -32,7 +31,7 @@ export const useGetCharacters = ({ inputSelect, ...rest }: ISearchState) => {
     select: selectCharacters,
     initialPageParam: 1,
     getNextPageParam: (lastPage, _, lastPageParam) => {
-      if (!lastPage.data.info.next) {
+      if (lastPage.data.length < PAGE_LIMIT) {
         return null;
       }
       return lastPageParam + 1;
