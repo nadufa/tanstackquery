@@ -1,10 +1,10 @@
 import { useGetCharacters } from "@/entities/character";
-import { SearchBar } from "@/features";
+import { AddNewCharacter, SearchBar } from "@/features";
 import { initialState } from "@/pages/HomePage/lib";
 import { Button } from "@/shared/ui";
 import { CharactersList } from "@/widgets/CharactersList";
 import { CharacterInfo } from "@/widgets/ChatacterInfo";
-import { Box, Flex, Title } from "@mantine/core";
+import { Flex, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
@@ -46,9 +46,10 @@ export const Container = () => {
 
       <Flex className={s.contentBlock}>
         <Flex className={clsx(s.list, s.contentPart)}>
-          <Box className={s.contentHeader}>
+          <Flex className={s.contentHeader}>
             <Title order={2}>List of characters</Title>
-          </Box>
+            <AddNewCharacter />
+          </Flex>
 
           <CharactersList
             data={data ? data.pages : []}
@@ -66,9 +67,9 @@ export const Container = () => {
         </Flex>
 
         <Flex className={clsx(s.details, s.contentPart)}>
-          <Box className={s.contentHeader}>
+          <Flex className={s.contentHeader}>
             <Title order={2}>Character information</Title>
-          </Box>
+          </Flex>
           <CharacterInfo selectedCharacterId={selectedCharacter} />
         </Flex>
       </Flex>

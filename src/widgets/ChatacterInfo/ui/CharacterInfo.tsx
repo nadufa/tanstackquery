@@ -1,5 +1,6 @@
 import { CharacterDetails } from "@/entities";
 import { useGetSelectedCharacter } from "@/entities/character";
+import { EditCharacter } from "@/features/EditCharacter";
 import { Button } from "@/shared/ui";
 import { ICharacterInfo } from "./types";
 
@@ -9,13 +10,18 @@ export const CharacterInfo = ({ selectedCharacterId }: ICharacterInfo) => {
   });
 
   return (
-    <CharacterDetails
-      isError={isError}
-      isLoading={isFetching}
-      data={data}
-      emptyDataLabel="Select character"
-      isEmptyData={!data}
-      errorBlockChildren={<Button onClick={() => refetch()}>Try again</Button>}
-    />
+    <>
+      <CharacterDetails
+        isError={isError}
+        isLoading={isFetching}
+        data={data}
+        emptyDataLabel="Select character"
+        isEmptyData={!data}
+        errorBlockChildren={
+          <Button onClick={() => refetch()}>Try again</Button>
+        }
+      />
+      {data && <EditCharacter data={data} />}
+    </>
   );
 };

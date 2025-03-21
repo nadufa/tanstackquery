@@ -24,6 +24,12 @@
         height: 5%;
         text-align: center;
         border-bottom: 3px solid #71657e;
+        justify-content: space-between;
+        padding: auto 15px;
+
+        .headerButton {
+          height: 95%;
+        }
       }
 
       .contentFooter {

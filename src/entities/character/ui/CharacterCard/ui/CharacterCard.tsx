@@ -1,3 +1,4 @@
+import { DeleteCharacter } from "@/features/DeleteCharacter";
 import { withConsoleLog } from "@/shared/hocs";
 import { Box, Flex, Image, Title } from "@mantine/core";
 import clsx from "clsx";
@@ -38,6 +39,7 @@ const BaseCharacterCard = ({
           <Title order={3}>Name: {name}</Title>
           <Title order={3}>ID: {id}</Title>
         </Box>
+        <DeleteCharacter name={name} id={id} />
       </Flex>
     </Flex>
   );

@@ -36,5 +36,6 @@ export const useGetCharacters = ({ inputSelect, ...rest }: ISearchState) => {
       }
       return lastPageParam + 1;
     },
+    refetchOnWindowFocus: false,
   });
 };

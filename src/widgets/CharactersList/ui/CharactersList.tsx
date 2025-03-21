@@ -6,7 +6,7 @@ import { IVirtualCharactersList } from "./types";
 
 const WithVirtualizerList = withVirtualizer({
   estimateSize: 200,
-  overscan: 3,
+  overscan: 10,
 })();
 
 export const CharactersList = withQueryStatus(

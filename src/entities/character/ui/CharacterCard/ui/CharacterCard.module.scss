@@ -13,6 +13,7 @@
         border-radius: 15px;
         gap: 25px;
         cursor: pointer;
+        position: relative;
 
         &:hover {
           background: linear-gradient( #557aea1b, #fff, #557aea1b );

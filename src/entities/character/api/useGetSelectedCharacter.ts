@@ -34,5 +34,6 @@ export const useGetSelectedCharacter = ({
       fetchSelectedCharacter({ queryClient, signal, id: selectedCharacterId }),
     select: ({ data }) => selectCharacter(data),
     retry: 1,
+    refetchOnWindowFocus: false,
   });
 };
