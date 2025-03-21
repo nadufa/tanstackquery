@@ -3,7 +3,6 @@ import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ICharacter } from "./model";
 
 export const fetchSelectedCharacter = ({
-  queryClient,
   signal,
   id,
 }: {
@@ -11,12 +10,6 @@ export const fetchSelectedCharacter = ({
   signal: AbortSignal;
   id: number | null;
 }) => {
-  queryClient.cancelQueries({
-    queryKey: ["characters", "id"],
-    predicate: ({ queryKey }) => {
-      return queryKey[queryKey.length - 1] === String(id);
-    },
-  });
   return axiosInstance.get<ICharacter>(`/characters/${id}`, {
     signal,
   });
