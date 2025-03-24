@@ -1,6 +1,6 @@
 import { CharacterDetails } from "@/entities";
 import { useGetSelectedCharacter } from "@/entities/character";
-import { EditCharacter } from "@/features/EditCharacter";
+import { EditCharacter } from "@/features";
 import { Button } from "@/shared/ui";
 import { ICharacterInfo } from "./types";
 

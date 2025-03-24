@@ -3,4 +3,5 @@ import { MouseEvent } from "react";
 
 export interface IButton extends MantineButtonProps {
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  type?: HTMLButtonElement["type"];
 }

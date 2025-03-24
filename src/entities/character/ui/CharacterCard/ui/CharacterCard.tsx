@@ -1,4 +1,4 @@
-import { DeleteCharacter } from "@/features/DeleteCharacter";
+import { DeleteCharacter } from "@/features";
 import { withConsoleLog } from "@/shared/hocs";
 import { Box, Flex, Image, Title } from "@mantine/core";
 import clsx from "clsx";

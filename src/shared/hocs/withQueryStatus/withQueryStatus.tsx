@@ -21,6 +21,7 @@ export const withQueryStatus = <T extends IWithQueryStatus>(
             visible
             overlayProps={{ blur: 1 }}
             loaderProps={{ color: "#7c609a", size: 100 }}
+            zIndex={199}
           />
         </Box>
       );

@@ -1,18 +1,8 @@
-export interface ICharacter {
-  created: string;
-  episode: string[];
-  id: number;
-  image: string;
-  location: {
-    name: string;
-    url: string;
-  };
+export interface ICharacterSchema {
   name: string;
-  origin: {
-    name: string;
-    url: string;
-  };
-  species:
+  type?: string;
+  image?: string;
+  species?:
     | "Human"
     | "Alien"
     | "Humanoid"
@@ -25,6 +15,4 @@ export interface ICharacter {
     | "Disease";
   status: "alive" | "dead" | "unknown";
   gender: "female" | "male" | "genderless" | "unknown";
-  type: string;
-  url: string;
 }
