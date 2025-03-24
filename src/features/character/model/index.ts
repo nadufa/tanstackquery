@@ -1,2 +1,1 @@
-export { characterSchema } from "./characterSchema";
-export type { ICharacterSchema } from "./types";
+export { addCharacterSchema, editCharacterSchema } from "./characterSchema";

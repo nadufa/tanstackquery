@@ -7,8 +7,8 @@ import {
 import { Box, Modal, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { genderValueData, speciesSelectData, statusValueData } from "../../lib";
-import { ICharacterSchema } from "../../model";
 import { useAddNewCharacter } from "../lib";
+import { IAddCharacterSchema } from "../model";
 import s from "./AddNewCharacter.module.scss";
 
 export const AddNewCharacter = () => {
@@ -21,7 +21,7 @@ export const AddNewCharacter = () => {
     reset();
   };
 
-  const onSubmitForm = (data: ICharacterSchema) => {
+  const onSubmitForm = (data: IAddCharacterSchema) => {
     console.log(data);
     close();
     reset();

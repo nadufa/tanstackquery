@@ -1,15 +1,10 @@
 import { ICharacter } from "@/entities/character";
-import {
-  Button,
-  ControlledInput,
-  ControlledSegmentedControl,
-  ControlledSelect,
-} from "@/shared/ui";
+import { Button, ControlledInput, ControlledSelect } from "@/shared/ui";
 import { Box, Modal, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { genderValueData, speciesSelectData, statusValueData } from "../../lib";
-import { ICharacterSchema } from "../../model";
+import { speciesSelectData } from "../../lib";
 import { useEditCharacter } from "../lib";
+import { IEditCharacterSchema } from "../model";
 import s from "./EditCharacter.module.scss";
 
 export const EditCharacter = ({ data }: { data: ICharacter }) => {
@@ -22,10 +17,9 @@ export const EditCharacter = ({ data }: { data: ICharacter }) => {
     reset();
   };
 
-  const onSubmitForm = (data: ICharacterSchema) => {
+  const onSubmitForm = (data: IEditCharacterSchema) => {
     console.log(data);
-    close();
-    reset();
+    onCloseModal();
   };
 
   return (
@@ -80,36 +74,6 @@ export const EditCharacter = ({ data }: { data: ICharacter }) => {
                   data={speciesSelectData}
                   size="lg"
                   allowDeselect={false}
-                />
-              </Box>
-
-              <Box w={"100%"}>
-                <Text size="lg" fw={500}>
-                  Status
-                </Text>
-                <ControlledSegmentedControl
-                  name={"status"}
-                  radius={10}
-                  withItemsBorders={false}
-                  data={statusValueData}
-                  size="md"
-                  control={control}
-                  fullWidth
-                />
-              </Box>
-
-              <Box w={"100%"}>
-                <Text size="lg" fw={500}>
-                  Gender
-                </Text>
-                <ControlledSegmentedControl
-                  name={"gender"}
-                  radius={10}
-                  control={control}
-                  withItemsBorders={false}
-                  data={genderValueData}
-                  size="md"
-                  fullWidth
                 />
               </Box>
 

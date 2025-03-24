@@ -1,10 +1,10 @@
 import { ICharacter } from "@/entities/character";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { characterSchema } from "../../model";
+import { editCharacterSchema } from "../../model";
 
 export const useEditCharacter = (data: ICharacter) => {
-  const { name, gender, image, type, status, species } = data;
+  const { name, image, type, species } = data;
 
   return useForm({
     defaultValues: {
@@ -12,10 +12,8 @@ export const useEditCharacter = (data: ICharacter) => {
       type,
       image,
       species,
-      status,
-      gender,
     },
-    mode: "onSubmit",
-    resolver: zodResolver(characterSchema),
+    mode: "onChange",
+    resolver: zodResolver(editCharacterSchema),
   });
 };

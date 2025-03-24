@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
-import { characterSchema } from "../../model";
+import { addCharacterSchema } from "../../model";
 
 export const useAddNewCharacter = () => {
   return useForm({
@@ -14,6 +14,6 @@ export const useAddNewCharacter = () => {
       gender: "unknown",
     },
     mode: "onChange",
-    resolver: zodResolver(characterSchema),
+    resolver: zodResolver(addCharacterSchema),
   });
 };

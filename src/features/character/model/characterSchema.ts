@@ -15,7 +15,7 @@ const SPECIES = [
 const STATUS = ["alive", "dead", "unknown"] as const;
 const GENDER = ["female", "male", "genderless", "unknown"] as const;
 
-export const characterSchema = z.object({
+export const baseCharacterSchema = z.object({
   name: z.string().trim().min(3, "Min length 3").max(30, "Max length 30"),
   type: z
     .string()
@@ -33,4 +33,11 @@ export const characterSchema = z.object({
   species: z.enum(SPECIES, { message: "Species is required" }),
   status: z.enum(STATUS, { message: "Status is required" }),
   gender: z.enum(GENDER, { message: "Gender is required" }),
+});
+
+export const addCharacterSchema = baseCharacterSchema;
+
+export const editCharacterSchema = baseCharacterSchema.omit({
+  status: true,
+  gender: true,
 });
