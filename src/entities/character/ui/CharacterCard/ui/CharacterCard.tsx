@@ -1,3 +1,4 @@
+import { useCharacterSettingsStore } from "@/entities/character";
 import { DeleteCharacter } from "@/features";
 import { withConsoleLog } from "@/shared/hocs";
 import { Box, Flex, Image, Title } from "@mantine/core";
@@ -9,14 +10,13 @@ const BaseCharacterCard = ({
   id,
   name,
   image,
-  selectedCharacter,
   size,
   start,
-  setSelectedCharacter,
 }: ICharacterCard) => {
-  const selectCharacterHandler = (id: number) => {
-    setSelectedCharacter(selectedCharacter === id ? null : id);
-  };
+  const selectedId = useCharacterSettingsStore((state) => state.selectedId);
+  const setSelectedId = useCharacterSettingsStore(
+    (state) => state.setSelectedId
+  );
 
   return (
     <Flex
@@ -27,12 +27,9 @@ const BaseCharacterCard = ({
       }}
     >
       <Flex
-        className={clsx(
-          s.characterItem,
-          selectedCharacter === id && s.selected
-        )}
+        className={clsx(s.characterItem, selectedId === id && s.selected)}
         key={id}
-        onClick={() => selectCharacterHandler(id)}
+        onClick={() => setSelectedId(id)}
       >
         <Image className={s.characterItemImg} src={image} />
         <Box>

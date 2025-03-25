@@ -1,59 +1,41 @@
 import { Flex, Input, SegmentedControl, Select } from "@mantine/core";
-import { ChangeEvent } from "react";
 
-import {
-  genderValueData,
-  inputSelectData,
-  isGenderValueType,
-  isStatusValueType,
-  statusValueData,
-} from "../lib";
+import { useCharacterSettingsStore } from "@/entities/character/model";
+import { genderValueData, inputSelectData, statusValueData } from "../lib";
 import s from "./SearchBar.module.scss";
-import { ISearchBar } from "./types";
 
-export const SearchBar = ({ searchState, setSearchState }: ISearchBar) => {
-  const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchState({
-      ...searchState,
-      inputText: e.currentTarget.value,
-    });
-  };
+export const SearchBar = () => {
+  const searchState = useCharacterSettingsStore((state) => state.searchState);
 
-  const onChangeSelectHandler = (option: {
-    label: string;
-    value: string;
-    disabled?: boolean;
-  }) => {
-    setSearchState({ ...searchState, inputSelect: option });
-  };
-
-  const onChangeStatusHandler = (value: string) => {
-    if (isStatusValueType(value)) {
-      setSearchState({ ...searchState, statusValue: value });
-    }
-  };
-
-  const onChangeGenderHandler = (value: string) => {
-    if (isGenderValueType(value)) {
-      setSearchState({ ...searchState, genderValue: value });
-    }
-  };
+  const setSearchInput = useCharacterSettingsStore(
+    (state) => state.setSearchInput
+  );
+  const setSearchSelect = useCharacterSettingsStore(
+    (state) => state.setSearchSelect
+  );
+  const setSearchStatus = useCharacterSettingsStore(
+    (state) => state.setSearchStatus
+  );
+  const setSearchGender = useCharacterSettingsStore(
+    (state) => state.setSearchGender
+  );
 
   return (
     <Flex className={s.searchPanel}>
       <Flex className={s.searchBlock}>
         <Input
           value={searchState.inputText}
-          onChange={onChangeInputHandler}
+          onChange={setSearchInput}
           className={s.search}
           placeholder="Search"
         />
         <Select
           flex={1}
+          allowDeselect={false}
           data={inputSelectData}
           value={searchState.inputSelect.value}
           onChange={(_value, option) => {
-            onChangeSelectHandler(option);
+            setSearchSelect(option);
           }}
           size="lg"
         />
@@ -64,7 +46,7 @@ export const SearchBar = ({ searchState, setSearchState }: ISearchBar) => {
           w={"40%"}
           data={statusValueData}
           value={searchState.statusValue}
-          onChange={onChangeStatusHandler}
+          onChange={setSearchStatus}
           size="lg"
         />
         <SegmentedControl
@@ -72,7 +54,7 @@ export const SearchBar = ({ searchState, setSearchState }: ISearchBar) => {
           w={"60%"}
           data={genderValueData}
           value={searchState.genderValue}
-          onChange={onChangeGenderHandler}
+          onChange={setSearchGender}
           size="lg"
         />
       </Flex>

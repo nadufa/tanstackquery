@@ -12,14 +12,14 @@ export const speciesSelectData = [
 ];
 
 export const statusValueData = [
-  { value: "alive", label: "Alive" },
-  { value: "dead", label: "Dead" },
+  { value: "Alive", label: "Alive" },
+  { value: "Dead", label: "Dead" },
   { value: "unknown", label: "Unknown" },
 ];
 
 export const genderValueData = [
-  { value: "female", label: "Female" },
-  { value: "male", label: "Male" },
-  { value: "genderless", label: "Genderless" },
+  { value: "Female", label: "Female" },
+  { value: "Male", label: "Male" },
+  { value: "Genderless", label: "Genderless" },
   { value: "unknown", label: "Unknown" },
 ];

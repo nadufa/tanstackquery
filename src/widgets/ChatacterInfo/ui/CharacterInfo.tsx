@@ -1,12 +1,16 @@
-import { CharacterDetails } from "@/entities";
-import { useGetSelectedCharacter } from "@/entities/character";
+import {
+  CharacterDetails,
+  useCharacterSettingsStore,
+  useGetSelectedCharacter,
+} from "@/entities/character";
 import { EditCharacter } from "@/features";
 import { Button } from "@/shared/ui";
-import { ICharacterInfo } from "./types";
 
-export const CharacterInfo = ({ selectedCharacterId }: ICharacterInfo) => {
+export const CharacterInfo = () => {
+  const selectedId = useCharacterSettingsStore((state) => state.selectedId);
+
   const { data, isError, isFetching, refetch } = useGetSelectedCharacter({
-    selectedCharacterId,
+    selectedCharacterId: selectedId,
   });
 
   return (

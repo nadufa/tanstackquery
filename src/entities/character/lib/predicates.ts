@@ -1,10 +1,10 @@
-import { GenderValueType, StatusValueType } from "@/shared/types/searchType";
+import { GenderValueType, StatusValueType } from "@/entities/character";
 
 export const isStatusValueType = (value: string): value is StatusValueType => {
   return (
     value === "all" ||
-    value === "alive" ||
-    value === "dead" ||
+    value === "Alive" ||
+    value === "Dead" ||
     value === "unknown"
   );
 };
@@ -12,9 +12,9 @@ export const isStatusValueType = (value: string): value is StatusValueType => {
 export const isGenderValueType = (value: string): value is GenderValueType => {
   return (
     value === "all" ||
-    value === "female" ||
-    value === "male" ||
-    value === "genderless" ||
+    value === "Female" ||
+    value === "Male" ||
+    value === "Genderless" ||
     value === "unknown"
   );
 };

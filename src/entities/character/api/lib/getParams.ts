@@ -1,4 +1,4 @@
-import { ISearchState } from "@/shared/types";
+import { ISearchState } from "../../model";
 
 export interface IGetParams extends ISearchState {
   pageParam: number;
@@ -14,7 +14,11 @@ export const getParams = ({
   limit = 20,
 }: IGetParams) => {
   const params = [
-    { condition: inputText, key: inputSelect?.value + "_eq", value: inputText },
+    {
+      condition: inputText,
+      key: inputSelect?.value.toLocaleLowerCase() + "_like",
+      value: inputText,
+    },
     {
       condition: statusValue && statusValue !== "all",
       key: "status_eq",

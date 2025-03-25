@@ -1,6 +1,6 @@
 import { axiosInstance } from "@/shared/api";
 import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ICharacter } from "./model";
+import { ICharacter } from "../model";
 
 export const fetchSelectedCharacter = ({
   signal,

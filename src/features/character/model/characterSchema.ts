@@ -16,7 +16,35 @@ const STATUS = ["alive", "dead", "unknown"] as const;
 const GENDER = ["female", "male", "genderless", "unknown"] as const;
 
 export const baseCharacterSchema = z.object({
-  name: z.string().trim().min(3, "Min length 3").max(30, "Max length 30"),
+  name: z
+    .string()
+    .trim()
+    .min(3, "Min length 3")
+    .max(30, "Max length 30")
+    .refine(
+      (value) => {
+        const arr = value.split(" ");
+        if (arr.length === 2) {
+          if (
+            arr[0][0] === arr[0][0].toUpperCase() &&
+            arr[1][0] === arr[1][0].toUpperCase()
+          ) {
+            const restArr1 = arr[0].split("");
+            const restArr2 = arr[1].split("");
+            restArr1.shift();
+            restArr2.shift();
+            if (
+              restArr1.join() === restArr1.join().toLowerCase() &&
+              restArr2.join() === restArr2.join().toLowerCase()
+            ) {
+              return true;
+            }
+          }
+        }
+        return false;
+      },
+      { message: "Invalid name, expected 'Name Surname'" }
+    ),
   type: z
     .string()
     .trim()

@@ -1,10 +1,9 @@
 import { axiosInstance } from "@/shared/api";
-import { ISearchState } from "@/shared/types";
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { getParams } from "./lib";
 import { IGetParams } from "./lib/getParams";
-import { ICharacter } from "./model";
+import { ICharacter, ISearchState } from "../model";
 
 const PAGE_LIMIT = 20;
 

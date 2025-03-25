@@ -23,8 +23,7 @@ export const AddNewCharacter = () => {
 
   const onSubmitForm = (data: IAddCharacterSchema) => {
     console.log(data);
-    close();
-    reset();
+    onCloseModal();
   };
 
   return (

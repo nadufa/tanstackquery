@@ -1,4 +1,4 @@
-import { ICharacter } from "@/entities/character/api";
+import { ICharacter } from "@/entities/character/model";
 
 export interface ICharacterDetails {
   data?: ICharacter;

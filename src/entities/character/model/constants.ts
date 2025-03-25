@@ -1,9 +1,9 @@
-import { ISearchState } from "@/shared/types";
+import { ISearchState } from "./types";
 
 export const initialState: ISearchState = {
   inputText: "",
   inputSelect: {
-    value: "name",
+    value: "Name",
     label: "Name",
     disabled: false,
   },

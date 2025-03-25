@@ -1,4 +1,4 @@
-import { CharacterCard } from "@/entities";
+import { CharacterCard } from "@/entities/character";
 import { withQueryStatus, withVirtualizer } from "@/shared/hocs";
 import { IWithQueryStatus } from "@/shared/hocs/withQueryStatus/types";
 import { LoadMoreBlock, LoadMoreType } from "./LoadMoreBlock";
@@ -12,8 +12,6 @@ const WithVirtualizerList = withVirtualizer({
 export const CharactersList = withQueryStatus(
   ({
     data,
-    selectedCharacter,
-    setSelectedCharacter,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
@@ -39,8 +37,6 @@ export const CharactersList = withQueryStatus(
               name={name}
               size={size}
               start={start}
-              selectedCharacter={selectedCharacter}
-              setSelectedCharacter={setSelectedCharacter}
             />
           );
         }}
