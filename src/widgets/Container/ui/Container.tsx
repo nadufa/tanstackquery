@@ -3,15 +3,20 @@ import {
   useGetCharacters,
 } from "@/entities/character";
 import { AddNewCharacter, SearchBar } from "@/features";
-import { Button } from "@/shared/ui";
+import { Button, NotificationModal } from "@/shared/ui";
 import { CharacterInfo, CharactersList } from "@/widgets";
 import { Flex, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
+import { useShallow } from "zustand/react/shallow";
 import s from "./Container.module.scss";
 
 export const Container = () => {
-  const searchState = useCharacterSettingsStore((state) => state.searchState);
+  console.log("Container");
+
+  const searchState = useCharacterSettingsStore(
+    useShallow((state) => state.searchState)
+  );
 
   const [debounced] = useDebouncedValue(searchState.inputText, 1000);
   const {
@@ -29,6 +34,7 @@ export const Container = () => {
 
   return (
     <Flex className={s.container}>
+      <NotificationModal />
       <SearchBar />
       <Flex className={s.contentBlock}>
         <Flex className={clsx(s.list, s.contentPart)}>

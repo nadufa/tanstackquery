@@ -50,9 +50,11 @@ export interface ISearchState {
 export interface ICharacterSettings {
   searchState: ISearchState;
   selectedId: number | null;
+  notification: string | null;
   setSearchInput: (e: ChangeEvent<HTMLInputElement>) => void;
   setSearchSelect: (option: ComboboxItem) => void;
   setSearchStatus: (value: string) => void;
   setSearchGender: (value: string) => void;
   setSelectedId: (newId: number | null) => void;
+  setNotification: (value: string | null) => void;
 }

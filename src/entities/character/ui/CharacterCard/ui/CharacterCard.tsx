@@ -18,6 +18,12 @@ const BaseCharacterCard = ({
     (state) => state.setSelectedId
   );
 
+  const selectCharacterHandler = () => {
+    console.log("select");
+
+    setSelectedId(id);
+  };
+
   return (
     <Flex
       className={s.itemContainer}
@@ -29,7 +35,7 @@ const BaseCharacterCard = ({
       <Flex
         className={clsx(s.characterItem, selectedId === id && s.selected)}
         key={id}
-        onClick={() => setSelectedId(id)}
+        onClick={selectCharacterHandler}
       >
         <Image className={s.characterItemImg} src={image} />
         <Box>

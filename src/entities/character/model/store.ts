@@ -8,6 +8,7 @@ export const useCharacterSettingsStore = create<ICharacterSettings>()(
   immer((set) => ({
     searchState: initialState,
     selectedId: null,
+    notification: null,
     setSearchInput: (e) => {
       set((state) => {
         state.searchState.inputText = e.currentTarget.value;
@@ -41,6 +42,11 @@ export const useCharacterSettingsStore = create<ICharacterSettings>()(
     setSelectedId: (newId) => {
       set((state) => {
         state.selectedId = state.selectedId === newId ? null : newId;
+      });
+    },
+    setNotification: (value) => {
+      set((state) => {
+        state.notification = value;
       });
     },
   }))
