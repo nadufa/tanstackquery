@@ -1,10 +1,11 @@
-import { create } from "zustand";
+import { useStore } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { createStore } from "zustand/vanilla";
 import { isGenderValueType, isStatusValueType } from "../lib";
 import { initialState } from "./constants";
 import { ICharacterSettings } from "./types";
 
-export const useCharacterSettingsStore = create<ICharacterSettings>()(
+export const store = createStore<ICharacterSettings>()(
   immer((set) => ({
     searchState: initialState,
     selectedId: null,
@@ -51,3 +52,9 @@ export const useCharacterSettingsStore = create<ICharacterSettings>()(
     },
   }))
 );
+
+export function useCharacterSettingsStore<T>(
+  selector?: (state: ICharacterSettings) => T
+) {
+  return useStore(store, selector!);
+}

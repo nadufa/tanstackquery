@@ -1,23 +1,33 @@
 import { Flex, Input, SegmentedControl, Select } from "@mantine/core";
+import { useShallow } from "zustand/react/shallow";
 
 import { useCharacterSettingsStore } from "@/entities/character/model";
 import { genderValueData, inputSelectData, statusValueData } from "../lib";
 import s from "./SearchBar.module.scss";
 
 export const SearchBar = () => {
-  const searchState = useCharacterSettingsStore((state) => state.searchState);
-
-  const setSearchInput = useCharacterSettingsStore(
-    (state) => state.setSearchInput
-  );
-  const setSearchSelect = useCharacterSettingsStore(
-    (state) => state.setSearchSelect
-  );
-  const setSearchStatus = useCharacterSettingsStore(
-    (state) => state.setSearchStatus
-  );
-  const setSearchGender = useCharacterSettingsStore(
-    (state) => state.setSearchGender
+  const {
+    searchState,
+    setSearchGender,
+    setSearchInput,
+    setSearchSelect,
+    setSearchStatus,
+  } = useCharacterSettingsStore(
+    useShallow(
+      ({
+        searchState,
+        setSearchInput,
+        setSearchSelect,
+        setSearchStatus,
+        setSearchGender,
+      }) => ({
+        searchState,
+        setSearchInput,
+        setSearchSelect,
+        setSearchStatus,
+        setSearchGender,
+      })
+    )
   );
 
   return (

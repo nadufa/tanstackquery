@@ -19,7 +19,7 @@ export default tseslint.config(
   { ignores: ["dist"] },
   {
     extends: [
-      ...compat.extends("@feature-sliced/eslint-config"),
+      // ...compat.extends("@feature-sliced/eslint-config"),
       js.configs.recommended,
       ...tseslint.configs.recommended,
     ],

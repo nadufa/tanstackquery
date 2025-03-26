@@ -1,21 +1,22 @@
-import {
-  useCharacterSettingsStore,
-  useGetCharacters,
-} from "@/entities/character";
+import { useGetCharacters } from "@/entities/character";
+import { store } from "@/entities/character/model/store";
 import { AddNewCharacter, SearchBar } from "@/features";
 import { Button, NotificationModal } from "@/shared/ui";
 import { CharacterInfo, CharactersList } from "@/widgets";
 import { Flex, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
-import { useShallow } from "zustand/react/shallow";
+import { useStoreWithEqualityFn } from "zustand/traditional";
+import { shallow } from "zustand/vanilla/shallow";
 import s from "./Container.module.scss";
 
 export const Container = () => {
-  console.log("Container");
-
-  const searchState = useCharacterSettingsStore(
-    useShallow((state) => state.searchState)
+  const searchState = useStoreWithEqualityFn(
+    store,
+    (state) => state.searchState,
+    ({ inputSelect, ...rest }, { inputSelect: inputSelectB, ...restB }) => {
+      return shallow(rest, restB) && inputSelect.value !== inputSelectB.value;
+    }
   );
 
   const [debounced] = useDebouncedValue(searchState.inputText, 1000);

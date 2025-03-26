@@ -22,7 +22,7 @@ export const useDeleteCharacter = ({
       setNotification(`Character ${name} was deleted successfully!`);
     },
     mutationFn: () => {
-      return axiosInstance.delete(`/characters/${id}sdfsdf`);
+      return axiosInstance.delete(`/characters/${id}`);
     },
     onError: () => {
       setNotification(`Some error occured!`);
