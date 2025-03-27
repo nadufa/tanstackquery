@@ -5,7 +5,7 @@ export const withConsoleLog = <T extends object>(
   logData: string
 ) => {
   return (props: T) => {
-    console.log(logData);
+    // console.log(logData);
 
     return <Component {...props} />;
   };

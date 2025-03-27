@@ -1,5 +1,4 @@
 import { useGetCharacters } from "@/entities/character";
-import { store } from "@/entities/character/model/store";
 import { AddNewCharacter, SearchBar } from "@/features";
 import { Button, NotificationModal } from "@/shared/ui";
 import { CharacterInfo, CharactersList } from "@/widgets";
@@ -8,6 +7,8 @@ import { useDebouncedValue } from "@mantine/hooks";
 import clsx from "clsx";
 import { useStoreWithEqualityFn } from "zustand/traditional";
 import { shallow } from "zustand/vanilla/shallow";
+
+import { store } from "@/entities/character/model/store";
 import s from "./Container.module.scss";
 
 export const Container = () => {

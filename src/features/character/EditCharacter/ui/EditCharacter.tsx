@@ -3,14 +3,21 @@ import { Button, ControlledInput, ControlledSelect } from "@/shared/ui";
 import { Box, Modal, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { speciesSelectData } from "../../lib";
-import { useEditCharacter } from "../lib";
+import { useEditCharacter } from "../api/useEditCharacter";
+import { useEditCharacterForm } from "../lib";
 import { IEditCharacterSchema } from "../model";
 import s from "./EditCharacter.module.scss";
 
 export const EditCharacter = ({ data }: { data: ICharacter }) => {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { control, handleSubmit, reset } = useEditCharacter(data);
+  const { control, handleSubmit, reset } = useEditCharacterForm(data);
+
+  const { mutate, isPending } = useEditCharacter({
+    id: data.id,
+    name: data.name,
+    onSettled: close,
+  });
 
   const onCloseModal = () => {
     close();
@@ -18,8 +25,7 @@ export const EditCharacter = ({ data }: { data: ICharacter }) => {
   };
 
   const onSubmitForm = (data: IEditCharacterSchema) => {
-    console.log(data);
-    onCloseModal();
+    mutate(data);
   };
 
   return (
@@ -77,7 +83,7 @@ export const EditCharacter = ({ data }: { data: ICharacter }) => {
                 />
               </Box>
 
-              <Button type={"submit"} fullWidth>
+              <Button type={"submit"} fullWidth loading={isPending}>
                 Save changes
               </Button>
             </form>

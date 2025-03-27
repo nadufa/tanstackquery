@@ -1,1 +1,1 @@
-export { useAddNewCharacter } from "./useAddNewCharacter";
+export { useAddNewCharacterForm } from "./useAddNewCharacterForm";

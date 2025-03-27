@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { editCharacterSchema } from "../../model";
 
-export const useEditCharacter = (data: ICharacter) => {
+export const useEditCharacterForm = (data: ICharacter) => {
   const { name, image, type, species } = data;
 
   return useForm({

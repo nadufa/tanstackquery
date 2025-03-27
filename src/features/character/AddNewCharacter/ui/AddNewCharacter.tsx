@@ -7,14 +7,14 @@ import {
 import { Box, Modal, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { genderValueData, speciesSelectData, statusValueData } from "../../lib";
-import { useAddNewCharacter } from "../lib";
+import { useAddNewCharacterForm } from "../lib";
 import { IAddCharacterSchema } from "../model";
 import s from "./AddNewCharacter.module.scss";
 
 export const AddNewCharacter = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { control, handleSubmit, reset } = useAddNewCharacter();
+  const { control, handleSubmit, reset } = useAddNewCharacterForm();
 
   const onCloseModal = () => {
     close();
