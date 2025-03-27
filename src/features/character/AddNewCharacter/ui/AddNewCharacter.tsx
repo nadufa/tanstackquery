@@ -7,6 +7,7 @@ import {
 import { Box, Modal, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { genderValueData, speciesSelectData, statusValueData } from "../../lib";
+import { useAddNewCharacter } from "../api";
 import { useAddNewCharacterForm } from "../lib";
 import { IAddCharacterSchema } from "../model";
 import s from "./AddNewCharacter.module.scss";
@@ -16,14 +17,17 @@ export const AddNewCharacter = () => {
 
   const { control, handleSubmit, reset } = useAddNewCharacterForm();
 
+  const { mutate, isPending } = useAddNewCharacter({
+    onSettled: close,
+  });
+
   const onCloseModal = () => {
     close();
     reset();
   };
 
   const onSubmitForm = (data: IAddCharacterSchema) => {
-    console.log(data);
-    onCloseModal();
+    mutate(data);
   };
 
   return (
@@ -111,7 +115,7 @@ export const AddNewCharacter = () => {
                 />
               </Box>
 
-              <Button type={"submit"} fullWidth>
+              <Button type={"submit"} fullWidth loading={isPending}>
                 Add
               </Button>
             </form>

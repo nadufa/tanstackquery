@@ -53,8 +53,8 @@ export const store = createStore<ICharacterSettings>()(
   }))
 );
 
-export function useCharacterSettingsStore<T>(
+export const useCharacterSettingsStore = <T>(
   selector?: (state: ICharacterSettings) => T
-) {
+) => {
   return useStore(store, selector!);
-}
+};

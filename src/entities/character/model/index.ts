@@ -1,4 +1,4 @@
-export { useCharacterSettingsStore } from "./store";
+export { store, useCharacterSettingsStore } from "./store";
 export type {
   GenderValueType,
   ICharacter,

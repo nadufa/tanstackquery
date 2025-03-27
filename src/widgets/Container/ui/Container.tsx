@@ -8,7 +8,7 @@ import clsx from "clsx";
 import { useStoreWithEqualityFn } from "zustand/traditional";
 import { shallow } from "zustand/vanilla/shallow";
 
-import { store } from "@/entities/character/model/store";
+import { store } from "@/entities/character";
 import s from "./Container.module.scss";
 
 export const Container = () => {

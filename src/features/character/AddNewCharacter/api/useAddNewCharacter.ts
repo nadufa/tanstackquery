@@ -1,15 +1,12 @@
 import { useCharacterSettingsStore } from "@/entities/character";
 import { axiosInstance } from "@/shared/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { IEditCharacterSchema } from "../model";
+import { v4 as uuidv4 } from "uuid";
+import { IAddCharacterSchema } from "../model";
 
-export const useEditCharacter = ({
-  id,
-  name,
+export const useAddNewCharacter = ({
   onSettled,
 }: {
-  id: number;
-  name: string;
   onSettled: () => void;
 }) => {
   const queryClient = useQueryClient();
@@ -18,15 +15,21 @@ export const useEditCharacter = ({
     (state) => state.setNotification
   );
 
+  const newId = uuidv4();
+
   return useMutation({
-    mutationFn: (data: IEditCharacterSchema) =>
-      axiosInstance.put(`/characters/${id}`, data),
+    mutationFn: (data: IAddCharacterSchema) =>
+      axiosInstance.post(`/characters`, {
+        ...data,
+        id: newId,
+        created: new Date().toISOString(),
+      }),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["characters", "id", id],
+        queryKey: ["characters", "list"],
       });
-      setNotification(`Character ${name} was edited successfully!`);
+      setNotification(`New character was added successfully!`);
     },
     onError: () => {
       setNotification(`Some error occured!`);

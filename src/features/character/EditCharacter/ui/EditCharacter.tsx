@@ -3,7 +3,7 @@ import { Button, ControlledInput, ControlledSelect } from "@/shared/ui";
 import { Box, Modal, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { speciesSelectData } from "../../lib";
-import { useEditCharacter } from "../api/useEditCharacter";
+import { useEditCharacter } from "../api";
 import { useEditCharacterForm } from "../lib";
 import { IEditCharacterSchema } from "../model";
 import s from "./EditCharacter.module.scss";

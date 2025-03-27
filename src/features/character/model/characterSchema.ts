@@ -12,8 +12,8 @@ const SPECIES = [
   "Cronenberg",
   "Disease",
 ] as const;
-const STATUS = ["alive", "dead", "unknown"] as const;
-const GENDER = ["female", "male", "genderless", "unknown"] as const;
+const STATUS = ["Alive", "Dead", "unknown"] as const;
+const GENDER = ["Female", "Male", "Genderless", "unknown"] as const;
 
 export const baseCharacterSchema = z.object({
   name: z
