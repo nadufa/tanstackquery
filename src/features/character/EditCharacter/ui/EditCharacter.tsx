@@ -24,8 +24,8 @@ export const EditCharacter = ({ data }: { data: ICharacter }) => {
     reset();
   };
 
-  const onSubmitForm = (data: IEditCharacterSchema) => {
-    mutate(data);
+  const onSubmitForm = (newData: IEditCharacterSchema) => {
+    mutate({ ...newData, gender: data.gender, status: data.status });
   };
 
   return (

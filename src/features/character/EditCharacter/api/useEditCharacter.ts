@@ -1,4 +1,8 @@
-import { useCharacterSettingsStore } from "@/entities/character";
+import {
+  GenderValueType,
+  StatusValueType,
+  useCharacterSettingsStore,
+} from "@/entities/character";
 import { axiosInstance } from "@/shared/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IEditCharacterSchema } from "../model";
@@ -19,12 +23,15 @@ export const useEditCharacter = ({
   );
 
   return useMutation({
-    mutationFn: (data: IEditCharacterSchema) =>
-      axiosInstance.put(`/characters/${id}`, data),
+    mutationFn: (
+      data:
+        | IEditCharacterSchema
+        | { status: StatusValueType; gender: GenderValueType }
+    ) => axiosInstance.put(`/characters/${id}`, data),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["characters", "id", id],
+        queryKey: ["characters"],
       });
       setNotification(`Character ${name} was edited successfully!`);
     },

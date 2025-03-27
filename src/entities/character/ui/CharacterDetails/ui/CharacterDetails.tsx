@@ -1,12 +1,12 @@
-import { Box, Flex, Image, Table, Title } from "@mantine/core";
+import { Box, Flex, Image, Table, Text, Title } from "@mantine/core";
 
 import { withQueryStatus, withVirtualizer } from "@/shared/hocs";
 import { VirtualItem } from "@tanstack/react-virtual";
 import { ReactNode, useCallback, useMemo } from "react";
 
+import { IWithQueryStatus } from "@/shared/hocs/withQueryStatus/types";
 import s from "./CharacterDetails.module.scss";
 import { ICharacterDetails } from "./types";
-import { IWithQueryStatus } from "@/shared/hocs/withQueryStatus/types";
 
 const TableContainer = ({ children }: { children: ReactNode }) => {
   return (
@@ -50,8 +50,14 @@ const BaseCharacterDetails = ({
             transform: `translateY(${start}px)`,
           }}
         >
-          <Table.Th>{field}</Table.Th>
-          <Table.Td>{String(info)}</Table.Td>
+          <Table.Th>
+            <Text lineClamp={1} fw={"bold"}>
+              {field}:{" "}
+            </Text>
+          </Table.Th>
+          <Table.Td>
+            <Text lineClamp={1}>{String(info)}</Text>
+          </Table.Td>
         </Table.Tr>
       );
     },
@@ -60,7 +66,14 @@ const BaseCharacterDetails = ({
 
   return (
     <Flex flex={1} pos={"relative"} direction={"column"} h={"95%"} p={30}>
-      <Flex align={"center"} justify={"center"} gap={50} h={"300px"} p={0}>
+      <Flex
+        align={"center"}
+        justify={"center"}
+        gap={50}
+        h={"300px"}
+        p={0}
+        mb={50}
+      >
         <Image
           className={s.characterImg}
           src={data?.image}

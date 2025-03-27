@@ -8,7 +8,7 @@ export const fetchSelectedCharacter = ({
 }: {
   queryClient: QueryClient;
   signal: AbortSignal;
-  id: number | null;
+  id: string | number | null;
 }) => {
   return axiosInstance.get<ICharacter>(`/characters/${id}`, {
     signal,
@@ -23,7 +23,7 @@ export const selectCharacter = (data: ICharacter) =>
 export const useGetSelectedCharacter = ({
   selectedCharacterId,
 }: {
-  selectedCharacterId: number | null;
+  selectedCharacterId: string | number | null;
 }) => {
   const queryClient = useQueryClient();
 
